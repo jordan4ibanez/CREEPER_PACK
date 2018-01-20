@@ -25,8 +25,8 @@ local function stock_explosion(pos,self)
 	if minetest.get_modpath("tnt") and tnt and tnt.boom and not minetest.is_protected(pos, "") then
 
 		tnt.boom(pos, {
-			radius = radius,
-			damage_radius = damage_radius,
+			radius = self.explosion_radius,
+			damage_radius = self.explosion_radius,
 			sound = self.sounds.explode,
 		})
 	else
@@ -37,8 +37,8 @@ local function stock_explosion(pos,self)
 			max_hear_distance = self.sounds.distance or 32
 		})
 
-		entity_physics(pos, damage_radius)
-		effect(pos, 32, "tnt_smoke.png", radius * 3, radius * 5, radius, 1, 0)
+		entity_physics(pos, self.explosion_radius)
+		effect(pos, 32, "tnt_smoke.png", self.explosion_radius * 3, self.explosion_radius * 5, self.explosion_radius, 1, 0)
 	end
 
 end
@@ -83,7 +83,7 @@ mobs:register_mob("cookie_creeper:cookie_creeper", {
 	run_velocity = 3,
 	attack_type = "explode",
 	
-	explosion_radius = 3,
+	explosion_radius = 5,
 	explosion_fire = false,
 
 	-- Force-ignite creeper with flint and steel and explode after 1.5 seconds.

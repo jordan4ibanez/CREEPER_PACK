@@ -11,19 +11,35 @@ local S, NS = dofile(MP.."/intllib.lua")
 --################### CREEPER
 --###################
 
+--create a giant igloo
+local function igloo_explosion(pos,self)
+	local igloo_radius = self.explosion_radius * 2
+
+	for z=-igloo_radius, igloo_radius do
+	for y=-igloo_radius, igloo_radius do
+	for x=-igloo_radius, igloo_radius do
+	  if x*x+y*y+z*z <= igloo_radius*igloo_radius + igloo_radius then
+		local index_pos = {x=pos.x+x,y=pos.y+y,z=pos.z+z}
+		if minetest.get_node(index_pos).name == "air" then
+			minetest.set_node(index_pos,{name="default:snowblock"})
+		end
+	  end
+	end
+	end
+	end
+end
 
 
-
-mobs:register_mob("stone_creeper:stone_creeper", {
+mobs:register_mob("extreme_snow_creeper:extreme_snow_creeper", {
 	type = "monster",
 	hp_min = 20,
 	hp_max = 20,
 	collisionbox = {-0.3, -0.01, -0.3, 0.3, 1.69, 0.3},
 	pathfinding = 1,
 	visual = "mesh",
-	mesh = "stone_creeper.b3d",
+	mesh = "extreme_snow_creeper.b3d",
 	textures = {
-		{"stone_creeper.png"},
+		{"extreme_snow_creeper.png"},
 	},
 	visual_size = {x=3, y=3},
 	sounds = {
@@ -66,6 +82,22 @@ mobs:register_mob("stone_creeper:stone_creeper", {
 		end
 	end,
 	do_custom = function(self, dtime)
+		
+		--lightning explosion instead of boom
+		if self.timer > self.explosion_timer - 0.5 then
+			self.object:remove()
+			igloo_explosion(self.object:getpos(),self)
+			--[[
+			minetest.sound_play("tnt_explode", {
+				pos = self.object:getpos(),
+				max_hear_distance = 10,
+				gain = 10.0,
+			})
+			lightning.strike(self.object:getpos())
+			]]--
+			return
+		end
+		
 		if self._forced_explosion_countdown_timer ~= nil then
 			self._forced_explosion_countdown_timer = self._forced_explosion_countdown_timer - dtime
 			if self._forced_explosion_countdown_timer <= 0 then
@@ -122,14 +154,14 @@ mobs:register_mob("stone_creeper:stone_creeper", {
 })
 
 
-mobs:spawn_specific("stone_creeper:stone_creeper",{ "default:stone", "default:gravel"}, {"air"}, 0, 7, 20, 5500, 10, -31000, 31000)
+mobs:spawn_specific("extreme_snow_creeper:extreme_snow_creeper",{ "default:dirt_with_snow", "default:snowblock", "default:snow" }, {"air"}, 0, 7, 20, 5500, 10, mobs_mc.spawn_height.overworld_min, mobs_mc.spawn_height.overworld_max)
 
 -- compatibility
---mobs:alias_mob("mobs:creeper", "mobs_mc:snow_creeper")
+--mobs:alias_mob("mobs:creeper", "mobs_mc:extreme_snow_creeper")
 
 -- spawn eggs
-mobs:register_egg("stone_creeper:stone_creeper", S("Stone Creeper"), "mobs_stone_creeper_inv.png", 0)
+mobs:register_egg("extreme_snow_creeper:extreme_snow_creeper", S("Extreme Snow Creeper"), "mobs_extreme_snow_creeper_inv.png", 0)
 
 if minetest.settings:get_bool("log_mods") then
-	minetest.log("action", "Stone Creeper loaded")
+	minetest.log("action", "Extreme Snow Creeper loaded")
 end
