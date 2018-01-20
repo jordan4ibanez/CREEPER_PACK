@@ -12,11 +12,16 @@ local S, NS = dofile(MP.."/intllib.lua")
 --###################
 
 
+-- chocolate cookie
+minetest.register_craftitem("cookie_creeper:cookie", {
+	description = S("Cookie"),
+	inventory_image = "creeper_cookie.png",
+	on_use = minetest.item_eat(2),
+})
+
 
 ---falling node code "spawning"
-local snow = minetest.registered_items["default:snow"]
-
-local function spawn_snow(pos,self)
+local function stock_explosion(pos,self)
 	if minetest.get_modpath("tnt") and tnt and tnt.boom and not minetest.is_protected(pos, "") then
 
 		tnt.boom(pos, {
@@ -24,14 +29,6 @@ local function spawn_snow(pos,self)
 			damage_radius = damage_radius,
 			sound = self.sounds.explode,
 		})
-		pos.y = pos.y + 1.5
-		for i = 10,25 do
-		local obj = core.add_entity(pos, "__builtin:falling_node")
-		if obj then
-			obj:get_luaentity():set_node(snow)
-			obj:setvelocity({x=math.random(-3,3),y=math.random(5,10),z=math.random(-3,3)})
-		end
-		end
 	else
 
 		minetest.sound_play(self.sounds.explode, {
@@ -42,37 +39,35 @@ local function spawn_snow(pos,self)
 
 		entity_physics(pos, damage_radius)
 		effect(pos, 32, "tnt_smoke.png", radius * 3, radius * 5, radius, 1, 0)
-		pos.y = pos.y + 1.5
-		for i = 10,25 do
-		local obj = core.add_entity(pos, "__builtin:falling_node")
-		if obj then
-			obj:get_luaentity():set_node(snow)
-			obj:setvelocity({x=math.random(-3,3),y=math.random(5,10),z=math.random(-3,3)})
-		end
-		end
 	end
 
 end
 ---------
 
+local function throw_cookies(pos,self)
+	for i = 4,15 do
+		local obj = minetest.add_item(pos, "cookie_creeper:cookie")
+		obj:setvelocity({x=math.random(-3,3),y=math.random(5,9),z=math.random(-3,3)})
+	end
+end
 
-
---we have our "explosion" 
-local function snowy_explosion(pos,self)
-	spawn_snow(pos,self)
+--we have our "cookie explosion" 
+local function cookie_explosion(pos,self)
+	stock_explosion(pos,self)
+	throw_cookies(pos,self)
 end
 
 
-mobs:register_mob("snow_creeper:snow_creeper", {
+mobs:register_mob("cookie_creeper:cookie_creeper", {
 	type = "monster",
 	hp_min = 20,
 	hp_max = 20,
 	collisionbox = {-0.3, -0.01, -0.3, 0.3, 1.69, 0.3},
 	pathfinding = 1,
 	visual = "mesh",
-	mesh = "snow_creeper.b3d",
+	mesh = "cookie_creeper.b3d",
 	textures = {
-		{"snow_creeper.png"},
+		{"cookie_creeper.png"},
 	},
 	visual_size = {x=3, y=3},
 	sounds = {
@@ -119,7 +114,7 @@ mobs:register_mob("snow_creeper:snow_creeper", {
 		--lightning explosion instead of boom
 		if self.timer > self.explosion_timer - 0.5 then
 			self.object:remove()
-			snowy_explosion(self.object:getpos(),self)
+			cookie_explosion(self.object:getpos(),self)
 			--[[
 			minetest.sound_play("tnt_explode", {
 				pos = self.object:getpos(),
@@ -187,13 +182,13 @@ mobs:register_mob("snow_creeper:snow_creeper", {
 })
 
 
-mobs:spawn_specific("snow_creeper:snow_creeper",{ "default:dirt_with_snow", "default:snowblock", "default:snow" }, {"air"}, 0, 7, 20, 5500, 10, mobs_mc.spawn_height.overworld_min, mobs_mc.spawn_height.overworld_max)
+mobs:spawn_specific("cookie_creeper:cookie_creeper",{ "default:dirt_with_snow", "default:snowblock", "default:snow" }, {"air"}, 0, 7, 20, 5500, 10, mobs_mc.spawn_height.overworld_min, mobs_mc.spawn_height.overworld_max)
 
 -- compatibility
 --mobs:alias_mob("mobs:creeper", "mobs_mc:snow_creeper")
 
 -- spawn eggs
-mobs:register_egg("snow_creeper:snow_creeper", S("Snow Creeper"), "mobs_snow_creeper_inv.png", 0)
+mobs:register_egg("cookie_creeper:cookie_creeper", S("Cookie Creeper"), "mobs_cookie_creeper_inv.png", 0)
 
 if minetest.settings:get_bool("log_mods") then
 	minetest.log("action", "Snow Creeper loaded")
