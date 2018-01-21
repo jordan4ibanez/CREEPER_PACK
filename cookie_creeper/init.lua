@@ -178,7 +178,7 @@ mobs:register_mob("cookie_creeper:cookie_creeper", {
 })
 
 
-mobs:spawn_specific("cookie_creeper:cookie_creeper",mobs_mc.spawn.solid, {"air"}, 0, 7, 20, 5500, 10, mobs_mc.spawn_height.overworld_min, mobs_mc.spawn_height.overworld_max)
+mobs:spawn_specific("cookie_creeper:cookie_creeper",mobs_mc.spawn.solid, {"air"}, 0, 7, 30, 6000, 4, mobs_mc.spawn_height.overworld_min, mobs_mc.spawn_height.overworld_max)
 
 -- compatibility
 --mobs:alias_mob("mobs:creeper", "mobs_mc:snow_creeper")

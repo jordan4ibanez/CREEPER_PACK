@@ -367,7 +367,7 @@ mobs:register_mob("ghost_creeper:ghost_creeper_trigger", {
 })
 
 
-mobs:spawn_specific("ghost_creeper:ghost_creeper_trigger",mobs_mc.spawn.solid, {"air"}, 0, 7, 20, 5500, 10, -31000, 31000)
+mobs:spawn_specific("ghost_creeper:ghost_creeper_trigger",mobs_mc.spawn.solid, {"air"}, 0, 7, 30, 6000, 4, -31000, 31000)
 
 -- compatibility
 --mobs:alias_mob("mobs:creeper", "mobs_mc:ghost_creeper")
