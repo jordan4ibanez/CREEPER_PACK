@@ -140,7 +140,7 @@ mobs:register_mob("ice_creeper:ice_creeper", {
 	},
 	floats = 1,
 	fear_height = 4,
-	water_damage = 1,
+	water_damage = 0,
 	lava_damage = 4,
 	light_damage = 0,
 	view_range = 16,
