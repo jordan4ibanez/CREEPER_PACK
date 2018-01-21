@@ -137,10 +137,6 @@ mobs:register_mob("cookie_creeper:cookie_creeper", {
 	on_die = function(self, pos)
 		-- Drop a random music disc
 		-- TODO: Only do this if killed by skeleton
-		if math.random(1, 200) == 1 then
-			local r = math.random(1, #mobs_mc.items.music_discs)
-			minetest.add_item({x=pos.x, y=pos.y+1, z=pos.z}, mobs_mc.items.music_discs[r])
-		end
 	end,
 	maxdrops = 2,
 	drops = {
@@ -182,7 +178,7 @@ mobs:register_mob("cookie_creeper:cookie_creeper", {
 })
 
 
-mobs:spawn_specific("cookie_creeper:cookie_creeper",{ "default:dirt_with_snow", "default:snowblock", "default:snow" }, {"air"}, 0, 7, 20, 5500, 10, mobs_mc.spawn_height.overworld_min, mobs_mc.spawn_height.overworld_max)
+mobs:spawn_specific("cookie_creeper:cookie_creeper",mobs_mc.spawn.solid, {"air"}, 0, 7, 20, 5500, 10, mobs_mc.spawn_height.overworld_min, mobs_mc.spawn_height.overworld_max)
 
 -- compatibility
 --mobs:alias_mob("mobs:creeper", "mobs_mc:snow_creeper")

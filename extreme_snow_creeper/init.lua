@@ -109,10 +109,6 @@ mobs:register_mob("extreme_snow_creeper:extreme_snow_creeper", {
 	on_die = function(self, pos)
 		-- Drop a random music disc
 		-- TODO: Only do this if killed by skeleton
-		if math.random(1, 200) == 1 then
-			local r = math.random(1, #mobs_mc.items.music_discs)
-			minetest.add_item({x=pos.x, y=pos.y+1, z=pos.z}, mobs_mc.items.music_discs[r])
-		end
 	end,
 	maxdrops = 2,
 	drops = {

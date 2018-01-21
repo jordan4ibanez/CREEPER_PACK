@@ -87,10 +87,6 @@ mobs:register_mob("ghost_creeper:ghost_creeper_ghost", {
 	on_die = function(self, pos)
 		-- Drop a random music disc
 		-- TODO: Only do this if killed by skeleton
-		if math.random(1, 200) == 1 then
-			local r = math.random(1, #mobs_mc.items.music_discs)
-			minetest.add_item({x=pos.x, y=pos.y+1, z=pos.z}, mobs_mc.items.music_discs[r])
-		end
 	end,
 	maxdrops = 2,
 	drops = {
@@ -198,10 +194,6 @@ mobs:register_mob("ghost_creeper:ghost_creeper_real", {
 	on_die = function(self, pos)
 		-- Drop a random music disc
 		-- TODO: Only do this if killed by skeleton
-		if math.random(1, 200) == 1 then
-			local r = math.random(1, #mobs_mc.items.music_discs)
-			minetest.add_item({x=pos.x, y=pos.y+1, z=pos.z}, mobs_mc.items.music_discs[r])
-		end
 	end,
 	maxdrops = 2,
 	drops = {
@@ -334,10 +326,6 @@ mobs:register_mob("ghost_creeper:ghost_creeper_trigger", {
 	on_die = function(self, pos)
 		-- Drop a random music disc
 		-- TODO: Only do this if killed by skeleton
-		if math.random(1, 200) == 1 then
-			local r = math.random(1, #mobs_mc.items.music_discs)
-			minetest.add_item({x=pos.x, y=pos.y+1, z=pos.z}, mobs_mc.items.music_discs[r])
-		end
 	end,
 	maxdrops = 2,
 	drops = {

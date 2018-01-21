@@ -93,10 +93,6 @@ mobs:register_mob("lightning_creeper:lightning_creeper", {
 	on_die = function(self, pos)
 		-- Drop a random music disc
 		-- TODO: Only do this if killed by skeleton
-		if math.random(1, 200) == 1 then
-			local r = math.random(1, #mobs_mc.items.music_discs)
-			minetest.add_item({x=pos.x, y=pos.y+1, z=pos.z}, mobs_mc.items.music_discs[r])
-		end
 	end,
 	maxdrops = 2,
 	drops = {
@@ -138,7 +134,7 @@ mobs:register_mob("lightning_creeper:lightning_creeper", {
 })
 
 
-mobs:spawn_specific("lightning_creeper:lightning_creeper",{ "default:stone", "default:gravel"}, {"air"}, 0, 7, 20, 5500, 10, -31000, 31000)
+mobs:spawn_specific("lightning_creeper:lightning_creeper",mobs_mc.spawn.solid, {"air"}, 0, 7, 20, 5500, 10, -31000, 31000)
 
 -- compatibility
 --mobs:alias_mob("mobs:creeper", "mobs_mc:snow_creeper")
