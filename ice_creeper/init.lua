@@ -148,7 +148,7 @@ mobs:register_mob("ice_creeper:ice_creeper", {
 })
 
 
-mobs:spawn_specific("ice_creeper:ice_creeper",{ "default:water_source", "default:water_flowing" }, {"air"}, 0, 7, 30, 6000, 4, mobs_mc.spawn_height.overworld_min, mobs_mc.spawn_height.overworld_max)
+mobs:spawn_specific("ice_creeper:ice_creeper",{ "default:water_source", "default:water_flowing" }, {"air"}, 0, 7, 30, 19000, 2, mobs_mc.spawn_height.overworld_min, mobs_mc.spawn_height.overworld_max)
 
 -- compatibility
 --mobs:alias_mob("mobs:creeper", "mobs_mc:extreme_snow_creeper")

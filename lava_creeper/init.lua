@@ -150,7 +150,7 @@ mobs:register_mob("lava_creeper:lava_creeper", {
 })
 
 
-mobs:spawn_specific("lava_creeper:lava_creeper",{ "default:lava_source", "default:lava_flowing" }, {"air"}, 0, 7, 30, 6000, 4, -31000, 31000)
+mobs:spawn_specific("lava_creeper:lava_creeper",{ "default:lava_source", "default:lava_flowing" }, {"air"}, 0, 7, 30, 19000, 2, -31000, 31000)
 
 -- compatibility
 --mobs:alias_mob("mobs:creeper", "mobs_mc:lava_creeper")

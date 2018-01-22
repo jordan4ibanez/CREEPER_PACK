@@ -118,7 +118,7 @@ mobs:register_mob("stone_creeper:stone_creeper", {
 })
 
 
-mobs:spawn_specific("stone_creeper:stone_creeper",{ "default:stone", "default:gravel"}, {"air"}, 0, 7, 30, 6000, 4, -31000, 31000)
+mobs:spawn_specific("stone_creeper:stone_creeper",{ "default:stone", "default:gravel"}, {"air"}, 0, 7, 30, 19000, 2, -31000, 31000)
 
 -- compatibility
 --mobs:alias_mob("mobs:creeper", "mobs_mc:snow_creeper")

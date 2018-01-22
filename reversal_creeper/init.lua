@@ -183,7 +183,7 @@ mobs:register_mob("reversal_creeper:reversal_creeper", {
 })
 
 
-mobs:spawn_specific("reversal_creeper:reversal_creeper",mobs_mc.spawn.solid, {"air"}, 0, 7, 30, 6000, 4, mobs_mc.spawn_height.overworld_min, mobs_mc.spawn_height.overworld_max)
+mobs:spawn_specific("reversal_creeper:reversal_creeper",mobs_mc.spawn.solid, {"air"}, 0, 7, 30, 19000, 2, mobs_mc.spawn_height.overworld_min, mobs_mc.spawn_height.overworld_max)
 
 -- compatibility
 --mobs:alias_mob("mobs:creeper", "mobs_mc:reversal_creeper")
